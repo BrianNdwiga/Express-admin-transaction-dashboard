@@ -1,0 +1,39 @@
+{
+  "name": "transactionrecord",
+  "version": "1.0.0",
+  "description": "a system that has a record of all transactions",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "saslprep": "^1.0.3",
+    "setprototypeof": "^1.1.1",
+    "sliced": "^1.0.1",
+    "sparse-bitfield": "^3.0.3",
+    "statuses": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrianNdwiga/Express-admin-transaction-dashboard.git"
+  },
+  "keywords": [
+    "Express",
+    "admin",
+    "dashboard",
+    "app"
+  ],
+  "author": "brian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrianNdwiga/Express-admin-transaction-dashboard/issues"
+  },
+  "homepage": "https://github.com/BrianNdwiga/Express-admin-transaction-dashboard#readme"
+}
