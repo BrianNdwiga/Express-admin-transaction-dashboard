@@ -1,4 +1,98 @@
 <html lang="en">
-<h1>Hi</h1>
+<%- include("./index.ejs") %>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <h1>
+                Overview
+            </h1>
+            <div class="wrapper">
+                <article class="card hover line">
+                    <i class="fas fa-shopping-cart"></i>
+                    <br>
+                    <h3 class="title">99</h3>
+
+                    <p class="text">Transactions</p>
+                </article>
+
+                <article class="card hover line">
+                    <i class="fas fa-wallet"></i>
+                    <br>
+                    <h3 class="title">0</h3>
+
+                    <p class="text">Available Balance (KSH)</p>
+                </article>
+
+                <article class="card hover line">
+                    <i class="fas fa-shopping-cart"></i>
+                    <br>
+                    <h3 class="title">0</h3>
+                    <p class="text">Shop Orders</p>
+                </article>
+
+                <article class="card hover line">
+                    <i class="fas fa-users"></i>
+                    <br>
+                    <h3 class="title">19</h3>
+
+                    <p class="text">Customers</p>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .card {
+            margin: 30px 20px;
+            padding: 40px 0;
+            width: 250px;
+            height: 200px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 1px 6px rgba(61, 65, 84, 0.15);
+            transition: all 0.2s ease-in-out;
+            overflow: hidden;
+        }
+        
+        .card .title {
+            font-size: 29px;
+        }
+        
+        .card .text {
+            font-size: 16px;
+        }
+        
+        .hover {
+            top: 0;
+            position: relative;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .hover:hover {
+            box-shadow: 0 20px 40px rgba(61, 65, 84, 0.15);
+            top: -2px;
+        }
+        
+        .line:before {
+            content: "";
+            display: block;
+            height: 5px;
+            width: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .line:hover:before {
+            width: 100%;
+        }
+    </style>
 
 </html>

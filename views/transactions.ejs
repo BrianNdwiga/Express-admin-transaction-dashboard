@@ -1,0 +1,64 @@
+<html lang="en">
+<%- include("./index.ejs") %>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Transactions
+                    </li>
+                </ol>
+            </nav>
+            <br />
+            <h1>Transactions</h1>
+            <p>Analyze your business account transactions</p>
+            <div>
+                <div style="display: flex; padding: 10px">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Excel</button>
+                        <button type="button" class="btn btn-info">Print</button>
+                        <button type="button" class="btn btn-success">PDF</button>
+                    </div>
+                    <a href="/transactionForm" style="margin-left: auto"><button type="button" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Transaction
+                      </button></a>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date/Time</th>
+                            <th scope="col">Sender Name</th>
+                            <th scope="col">Beneficiary</th>
+                            <th scope="col">Transaction Type</th>
+                            <th scope="col">Payment Mode</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Ref. No.</th>
+                            <th scope="col">Order No.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <style>
+        body {
+            padding: 1em 3em;
+        }
+    </style>
+
+</html>

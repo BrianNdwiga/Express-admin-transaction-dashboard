@@ -1,0 +1,63 @@
+<html lang="en">
+<%- include("./index.ejs") %>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <form action="/transactions" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px; ">
+                <h1>Transaction Form</h1>
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="date" id="date" name="date" class="form-control" />
+                            <label class="form-label" for="form6Example1">Date/Time</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" id="sendername" name="sendername" class="form-control" required />
+                            <label class="form-label" for="sendername">Sender Name</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="beneficiary" name="beneficiary" class="form-control" required />
+                    <label class="form-label" for="form6Example3">Beneficiary</label>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="transactiontype" name="transactiontype" class="form-control" required />
+                    <label class="form-label" for="form6Example4">Transaction Type</label>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="paymentmethods" name="paymentmethods" class="form-control" required />
+                    <label class="form-label" for="form6Example5">Payment Method</label>
+                </div>
+
+                <!-- Number input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="currency" name="currency" class="form-control" required />
+                    <label class="form-label" for="form6Example6">Currency</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="number" id="amount" name="amount" class="form-control" required />
+                    <label class="form-label" for="form6Example6">Amount</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="text" id="referencenumber" name="referencenumber" class="form-control" required />
+                    <label class="form-label" for="form6Example6">Ref No.</label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Add Transaction</button>
+            </form>
+        </div>
+    </main>
+
+</html>

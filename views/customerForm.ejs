@@ -1,0 +1,59 @@
+<html lang="en">
+<%- include("./index.ejs") %>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <form action="/customers" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px;">
+                <h1>Customer Form</h1>
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" id="nsme" class="form-control" name="name" required/>
+                            <label class="form-label" for="form6Example1">Name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="number" id="phone" name="phone" class="form-control" />
+                            <label class="form-label" for="form6Example2">Phone</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <input type="date" name="date" id="date" class="form-control" required/>
+                    <label class="form-label" for="form6Example3">Join Date</label>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="currency" name="currency" class="form-control" required/>
+                    <label class="form-label" for="form6Example4">Currency</label>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="number" id="amount" class="form-control" name="amount" required/>
+                    <label class="form-label" for="form6Example5">Amount Paid</label>
+                </div>
+
+                <!-- Number input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="group" class="form-control" name="group" required/>
+                    <label class="form-label" for="form6Example6">Group</label>
+                </div>
+
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="status" class="form-control" name="status" required/>
+                    <label class="form-label" for="form6Example7">Status</label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Add Customer</button>
+            </form>
+        </div>
+    </main>
+
+</html>

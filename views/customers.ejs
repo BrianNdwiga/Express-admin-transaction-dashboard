@@ -1,0 +1,56 @@
+<html lang="en">
+<%- include("./index.ejs") %>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+            <h1>Customers</h1>
+            <p>Here's a list of the people who also help you grow your business</p>
+            <div>
+                <div style="display: flex;padding: 10px;">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Excel</button>
+                        <button type="button" class="btn btn-primary">Print</button>
+                        <button type="button" class="btn btn-success">PDF</button>
+                    </div>
+                    <a href="/customerForm" style="margin-left: auto;"><button type="button" class="btn btn-info"><i class="fas fa-plus"></i> Add Customer</button></a>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Join Date</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col">Amount Paid</th>
+                            <th scope="col">Group</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <style>
+            button {
+                border-radius: 0.8em;
+            }
+        </style>
+
+</html>
