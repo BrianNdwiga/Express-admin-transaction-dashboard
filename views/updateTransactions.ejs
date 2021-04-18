@@ -10,7 +10,7 @@
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="date" id="date" name="date" class="form-control" value="<%= transaction.date %>" />
+                                <input type="text" id="date" name="date" class="form-control" value="<%= transaction.date %>" />
                                 <label class="form-label" for="form6Example1">Date/Time</label>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col">
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Add Transaction</button>
+                            <a data-doc="<%= transaction._id %>" class="edit"><button type="submit" class="btn btn-primary btn-block mb-4">Add Transaction</button></a>
                         </div>
                         <div class="col">
                             <a data-doc="<%= transaction._id %>" class="delete"><button type="button" class="btn btn-block mb-4 btn-danger button">Delete</button></a>
@@ -116,6 +116,19 @@
             }
         </style>
         <script>
+            // edit
+            const transactionedit = document.querySelector('a.edit');
+
+            transactionedit.addEventListener('click', (e) => {
+                const endpoint = `/transactions/${transactionedit.dataset.doc}`;
+
+                fetch(endpoint, {
+                        method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data => window.location.href = data.redirect)
+                    .catch(err => console.log(err));
+            });
             // delete
             const trashcan = document.querySelector('a.delete');
 

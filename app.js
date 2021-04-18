@@ -24,11 +24,19 @@ app.use((req, res, next) => {
     next();
 });
 
+// Dashboard total counts
 app.get('/', (req, res) => {
-    // res.send('Hello World!')
-    res.render('content');
-});
+    Transaction.estimatedDocumentCount()
+    Customer.estimatedDocumentCount()
+        .then(result => {
+            res.render('content', { transactioncount: result, customercount: result });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+})
 
+// customers
 app.get('/customers', (req, res) => {
     Customer.find().sort({ createdAt: -1 })
         .then(result => {
@@ -52,6 +60,29 @@ app.post('/customers', (req, res) => {
     customer.save()
         .then(result => {
             res.redirect('/customers');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.get('/customers/:id', (req, res) => {
+    const id = req.params.id;
+    Customer.findById(id)
+        .then(result => {
+            res.render('updateCustomers', { customer: result });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.delete('/customers/:id', (req, res) => {
+    const id = req.params.id;
+
+    Customer.findByIdAndDelete(id)
+        .then(result => {
+            res.json({ redirect: '/customers' });
         })
         .catch(err => {
             console.log(err);
@@ -88,7 +119,6 @@ app.post('/transactions', (req, res) => {
         });
 });
 
-
 app.get('/transactions/:id', (req, res) => {
     const id = req.params.id;
     Transaction.findById(id)
@@ -99,24 +129,6 @@ app.get('/transactions/:id', (req, res) => {
             console.log(err);
         });
 });
-
-app.put('/transactions/:id', (req, res) => {
-    updateRecord(req, res);
-    res.redirect('/transactions');
-})
-
-function updateRecord() {
-    Transaction.updateOne({ _id: req.params.id }, transaction).then(
-        () => {
-            res.redirect('/transactions');
-        }
-    ).catch(
-        (error) => {
-            console.log(err);
-        }
-    );
-
-};
 
 app.delete('/transactions/:id', (req, res) => {
     const id = req.params.id;

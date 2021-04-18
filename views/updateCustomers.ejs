@@ -1,0 +1,138 @@
+<html lang="en">
+<%- include("./index.ejs") %>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <form action="/customers" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px;">
+                <h1>Customer Form</h1>
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" id="nsme" class="form-control" name="name" value="<%= customer.name %>" required/>
+                            <label class="form-label" for="form6Example1">Name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="number" id="phone" name="phone" class="form-control" value="<%= customer.phone %>" />
+                            <label class="form-label" for="form6Example2">Phone</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" name="date" id="date" class="form-control" required value="<%= customer.date %>" />
+                            <label class="form-label" for="form6Example3">Join Date</label>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form6Example7">Currency</label>
+                            <select class="form-select" id="currency" name="currency" aria-label="Default select example" required value="<%= customer.currency %>">
+                                <option value="KSH">KSH</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-outline mb-4">
+                    <input type="number" id="amount" class="form-control" name="amount" required value="<%= customer.amount %>" />
+                    <label class="form-label" for="form6Example5">Amount Paid</label>
+                </div>
+
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" for="form6Example6">Group</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio1" value="<%= customer.group %>" checked>
+                                <label class="form-check-label" for="inlineRadio1">A</label>
+                            </div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio1" value="A">
+                                <label class="form-check-label" for="inlineRadio1">A</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio2" value="B">
+                                <label class="form-check-label" for="inlineRadio2">B</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio3" value="C">
+                                <label class="form-check-label" for="inlineRadio3">C</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form6Example7">Status</label>
+                            <select class="form-select" id="status" name="status" aria-label="Default select example" required value="<%= customer.status %>">
+                                <option value="Verified">Verified</option>
+                                <option value="Not Verified">Not Verfied</option>
+                                <option value="Cancelled">Cancelled</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <a data-doc="<%= customer._id %>" class="customerEdit"><button type="submit" class="btn btn-primary btn-block mb-4">Add Customer</button></a>
+                    </div>
+                    <div class="col">
+                        <a data-doc="<%= customer._id %>" class="delete"><button type="button" class="btn btn-block mb-4 btn-danger button">Delete</button></a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </main>
+    <style>
+        .form-label {
+            padding-right: 10px;
+        }
+        
+        .form-select {
+            width: 80%;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        // edit
+        const customeredit = document.querySelector('a.customerEdit');
+
+        customeredit.addEventListener('click', (e) => {
+            const endpoint = `/customers/${customeredit.dataset.doc}`;
+
+            fetch(endpoint, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => window.location.href = data.redirect)
+                .catch(err => console.log(err));
+        });
+        // delete
+        const trash = document.querySelector('a.delete');
+
+        trash.addEventListener('click', (e) => {
+            const endpoint = `/customers/${trash.dataset.doc}`;
+
+            fetch(endpoint, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => window.location.href = data.redirect)
+                .catch(err => console.log(err));
+        });
+    </script>
+
+</html>

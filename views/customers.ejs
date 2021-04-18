@@ -55,8 +55,7 @@
                                         <%= customer.status %>
                                     </td>
                                     <td style="display: flex;">
-                                        <button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger button delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <a href="/customers/<%= customer._id %>"><button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button></a>
                                     </td>
                                 </tr>
                                 <% }) %>
