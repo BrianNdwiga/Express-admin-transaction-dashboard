@@ -20,44 +20,87 @@
                     </div>
                 </div>
 
-                <!-- Text input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="beneficiary" name="beneficiary" class="form-control" required />
-                    <label class="form-label" for="form6Example3">Beneficiary</label>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <input type="text" id="beneficiary" name="beneficiary" class="form-control" required />
+                            <label class="form-label" for="form6Example3">Beneficiary</label>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" for="form6Example6">Transaction Type</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="transactiontype" id="inlineRadio1" value="External">
+                                <label class="form-check-label" for="inlineRadio1">External</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="transactiontype" id="inlineRadio2" value="Internal">
+                                <label class="form-check-label" for="inlineRadio2">Internal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="transactiontype" id="inlineRadio3" value="Credit">
+                                <label class="form-check-label" for="inlineRadio3">Credit</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="transactiontype" id="inlineRadio3" value="Non-Credit">
+                                <label class="form-check-label" for="inlineRadio3">Non-Credit</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form6Example7">Payment Method</label>
+                            <select class="form-select" id="paymentmethods" name="paymentmethods" aria-label="Default select example" required style="width: 70%;">
+                                <option value="Cash">Cash</option>
+                                <option value="Credit Card">Card</option>
+                                <option value="Cheque">Cheque</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form6Example7">Currency</label>
+                            <select class="form-select" id="currency" name="currency" aria-label="Default select example" required>
+                                <option value="KSH">KSH</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                              </select>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Text input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="transactiontype" name="transactiontype" class="form-control" required />
-                    <label class="form-label" for="form6Example4">Transaction Type</label>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <input type="number" id="amount" name="amount" class="form-control" required />
+                            <label class="form-label" for="form6Example6">Amount</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <input type="text" id="referencenumber" name="referencenumber" class="form-control" required />
+                            <label class="form-label" for="form6Example6">Ref No.</label>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="paymentmethods" name="paymentmethods" class="form-control" required />
-                    <label class="form-label" for="form6Example5">Payment Method</label>
-                </div>
-
-                <!-- Number input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="currency" name="currency" class="form-control" required />
-                    <label class="form-label" for="form6Example6">Currency</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <input type="number" id="amount" name="amount" class="form-control" required />
-                    <label class="form-label" for="form6Example6">Amount</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <input type="text" id="referencenumber" name="referencenumber" class="form-control" required />
-                    <label class="form-label" for="form6Example6">Ref No.</label>
-                </div>
-
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4">Add Transaction</button>
             </form>
         </div>
     </main>
+    <style>
+        .form-label {
+            padding-right: 10px;
+        }
+        
+        .form-select {
+            width: 80%;
+            padding: 5px;
+        }
+    </style>
 
 </html>

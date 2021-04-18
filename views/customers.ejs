@@ -12,14 +12,11 @@
             <p>Here's a list of the people who also help you grow your business</p>
             <div>
                 <div style="display: flex;padding: 10px;">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary">Excel</button>
-                        <button type="button" class="btn btn-primary">Print</button>
-                        <button type="button" class="btn btn-success">PDF</button>
-                    </div>
-                    <a href="/customerForm" style="margin-left: auto;"><button type="button" class="btn btn-info"><i class="fas fa-plus"></i> Add Customer</button></a>
+                    <%- include("./tablebuttons.ejs") %>
+                        <button type="button" class="btn btn-primary" id="print">Print</button>
+                        <a href="/customerForm" style="margin-left: auto;"><button type="button" class="btn btn-info"><i class="fas fa-plus"></i> Add Customer</button></a>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="customers">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
@@ -33,24 +30,63 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
+                        <% if (customers.length > 0) { %>
+                            <% customers.forEach(customer => { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= customer.name %>
+                                    </th>
+                                    <td>
+                                        <%= customer.phone %>
+                                    </td>
+                                    <td>
+                                        <%= customer.date %>
+                                    </td>
+                                    <td>
+                                        <%= customer.currency %>
+                                    </td>
+                                    <td>
+                                        <%= customer.amount %>
+                                    </td>
+                                    <td>
+                                        <%= customer.group %>
+                                    </td>
+                                    <td>
+                                        <%= customer.status %>
+                                    </td>
+                                    <td style="display: flex;">
+                                        <button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger button delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <p>There are no Records to display...</p>
+                                        <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
         <style>
-            button {
-                border-radius: 0.8em;
+            .button {
+                margin: 5px
             }
         </style>
+        <script>
+            $(function() {
+                $('#print').click(function() {
+                    var pageTitle = 'Customers',
+                        stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+                        win = window.open('', 'Print', 'width=500,height=300');
+                    win.document.write('<html><head><title>' + pageTitle + '</title>' +
+                        '<link rel="stylesheet" href="' + stylesheet + '">' +
+                        '</head><body>' + $('#customers')[0].outerHTML + ' < /body></html > ');
+                    win.document.close();
+                    win.print();
+                    win.close();
+                    return false;
+                });
+            });
+        </script>
 
 </html>

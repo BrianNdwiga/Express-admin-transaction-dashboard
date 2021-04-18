@@ -15,50 +15,87 @@
             <p>Analyze your business account transactions</p>
             <div>
                 <div style="display: flex; padding: 10px">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary">Excel</button>
-                        <button type="button" class="btn btn-info">Print</button>
-                        <button type="button" class="btn btn-success">PDF</button>
-                    </div>
-                    <a href="/transactionForm" style="margin-left: auto"><button type="button" class="btn btn-primary">
+                    <%- include("./tablebuttons.ejs") %>
+                        <button type="button" class="btn btn-primary" id="print">Print</button>
+                        <a href="/transactionForm" style="margin-left: auto"><button type="button" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Add Transaction
                       </button></a>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="transactions">
                     <thead>
                         <tr>
-                            <th scope="col">Date/Time</th>
                             <th scope="col">Sender Name</th>
+                            <th scope="col">Date/Time</th>
                             <th scope="col">Beneficiary</th>
-                            <th scope="col">Transaction Type</th>
+                            <th scope="col">Trans Type</th>
                             <th scope="col">Payment Mode</th>
                             <th scope="col">Currency</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Ref. No.</th>
-                            <th scope="col">Order No.</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
+                        <% if (transactions.length > 0) { %>
+                            <% transactions.forEach(transaction => { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= transaction.sendername %>
+                                    </th>
+                                    <td>
+                                        <%= transaction.date %>
+                                    </td>
+                                    <td>
+                                        <%= transaction.beneficiary %>
+                                    </td>
+                                    <td>
+                                        <%= transaction.transactiontype %>
+                                    </td>
+                                    <td>
+                                        <%= transaction.paymentmethods %>
+                                    </td>
+                                    <td>
+                                        <%= transaction.currency %>
+                                    </td>
+                                    <td>
+                                        <%= transaction.amount %>
+                                    </td>
+                                    <td>
+                                        <%= transaction.referencenumber %>
+                                    </td>
+                                    <td style="display: flex;">
+                                        <a href="/transactions/<%= transaction._id %>"><button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button></a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <p>There are no Records to display...</p>
+                                        <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
     <style>
-        body {
-            padding: 1em 3em;
+        .button {
+            margin: 5px
         }
     </style>
+    <script>
+        $(function() {
+            $('#print').click(function() {
+                var pageTitle = 'Transactions',
+                    stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+                    win = window.open('', 'Print', 'width=500,height=300');
+                win.document.write('<html><head><title>' + pageTitle + '</title>' +
+                    '<link rel="stylesheet" href="' + stylesheet + '">' +
+                    '</head><body>' + $('#transactions')[0].outerHTML + ' < /body></html > ');
+                win.document.close();
+                win.print();
+                win.close();
+                return false;
+            });
+        });
+    </script>
 
 </html>

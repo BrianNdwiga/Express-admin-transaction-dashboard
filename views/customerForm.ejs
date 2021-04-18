@@ -21,15 +21,24 @@
                 </div>
 
                 <!-- Text input -->
-                <div class="form-outline mb-4">
-                    <input type="date" name="date" id="date" class="form-control" required/>
-                    <label class="form-label" for="form6Example3">Join Date</label>
-                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="date" name="date" id="date" class="form-control" required/>
+                            <label class="form-label" for="form6Example3">Join Date</label>
+                        </div>
+                    </div>
 
-                <!-- Text input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="currency" name="currency" class="form-control" required/>
-                    <label class="form-label" for="form6Example4">Currency</label>
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form6Example7">Currency</label>
+                            <select class="form-select" id="currency" name="currency" aria-label="Default select example" required>
+                                <option value="KSH">KSH</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                              </select>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Email input -->
@@ -39,21 +48,53 @@
                 </div>
 
                 <!-- Number input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="group" class="form-control" name="group" required/>
-                    <label class="form-label" for="form6Example6">Group</label>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <!-- <input type="text" id="group" class="form-control" name="group" required/> -->
+                            <label class="form-label" for="form6Example6">Group</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio1" value="A">
+                                <label class="form-check-label" for="inlineRadio1">A</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio2" value="B">
+                                <label class="form-check-label" for="inlineRadio2">B</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="group" id="inlineRadio3" value="C">
+                                <label class="form-check-label" for="inlineRadio3">C</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form6Example7">Status</label>
+                            <select class="form-select" id="status" name="status" aria-label="Default select example" required>
+                                <option value="Verified">Verified</option>
+                                <option value="Not Verified">Not Verfied</option>
+                                <option value="Cancelled">Cancelled</option>
+                              </select>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Message input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="status" class="form-control" name="status" required/>
-                    <label class="form-label" for="form6Example7">Status</label>
-                </div>
 
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4">Add Customer</button>
             </form>
         </div>
     </main>
+    <style>
+        .form-label {
+            padding-right: 10px;
+        }
+        
+        .form-select {
+            width: 80%;
+            padding: 5px;
+        }
+    </style>
 
 </html>

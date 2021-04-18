@@ -7,31 +7,31 @@ const transactionSchema = new Schema({
     },
     sendername: {
         type: String,
-        // required: true,
+        required: true,
     },
     beneficiary: {
         type: String,
-        // required: true,
+        required: true,
     },
     transactiontype: {
         type: String,
-        // required: true
+        required: true
     },
     paymentmethods: {
         type: String,
-        // required: true
+        required: true
     },
     currency: {
         type: String,
-        // required: true
+        required: true
     },
     amount: {
         type: Number,
-        // required: true
+        required: true
     },
     referencenumber: {
         type: String,
-        // required: true
+        required: true
     }
 }, { timestamps: true });
 
