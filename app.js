@@ -14,8 +14,9 @@ dotenv.config();
 const User = require("./models/user");
 // connect to mongodb & listen for requests
 const db = process.env.db;
+const port = process.env.PORT;
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(result => app.listen(3000), console.log('connected'))
+    .then(result => app.listen(port), console.log('connected'))
     .catch(err => console.log(err));
 
 mongoose.set('useNewUrlParser', true);
