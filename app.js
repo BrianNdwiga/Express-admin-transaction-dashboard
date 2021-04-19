@@ -8,12 +8,13 @@ const session = require("express-session");
 const dashboardRoutes = require('./routes/dashboardRoutes')
 
 
-require('dotenv').config()
+const dotenv = require("dotenv");
+dotenv.config();
 
 const User = require("./models/user");
 // connect to mongodb & listen for requests
-const dbURI = process.env.db;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+const db = process.env.db;
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => app.listen(3000), console.log('connected'))
     .catch(err => console.log(err));
 
