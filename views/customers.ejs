@@ -4,7 +4,7 @@
         <div class="content-wrapper content-wrapper--with-bg">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">Overview</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
             </nav>
@@ -14,7 +14,7 @@
                 <div style="display: flex;padding: 10px;">
                     <%- include("./tablebuttons.ejs") %>
                         <button type="button" class="btn btn-primary" id="print">Print</button>
-                        <a href="/customerForm" style="margin-left: auto;"><button type="button" class="btn btn-info"><i class="fas fa-plus"></i> Add Customer</button></a>
+                        <a href="/dashboard/customerForm" style="margin-left: auto;"><button type="button" class="btn btn-info"><i class="fas fa-plus"></i> Add Customer</button></a>
                 </div>
                 <table class="table table-bordered" id="customers">
                     <thead>
@@ -55,7 +55,7 @@
                                         <%= customer.status %>
                                     </td>
                                     <td style="display: flex;">
-                                        <a href="/customers/<%= customer._id %>"><button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button></a>
+                                        <a href="/dashboard/customers/<%= customer._id %>"><button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button></a>
                                     </td>
                                 </tr>
                                 <% }) %>
@@ -85,7 +85,7 @@
                     win.close();
                     return false;
                 });
-            });
+            });​
         </script>
 
 </html>

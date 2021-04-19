@@ -2,7 +2,7 @@
 <%- include("./index.ejs") %>
     <main class="l-main">
         <div class="content-wrapper content-wrapper--with-bg">
-            <form action="/customers" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px;">
+            <form action="/dashboard/customers" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px;">
                 <h1>Customer Form</h1>
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row mb-4">
@@ -86,7 +86,7 @@
 
                 <div class="row mb-4">
                     <div class="col">
-                        <a data-doc="<%= customer._id %>" class="customerEdit"><button type="submit" class="btn btn-primary btn-block mb-4">Add Customer</button></a>
+                        <a data-doc="<%= customer._id %>" class="customerEdit"><button type="submit" class="btn btn-primary btn-block mb-4">Update Customer</button></a>
                     </div>
                     <div class="col">
                         <a data-doc="<%= customer._id %>" class="delete"><button type="button" class="btn btn-block mb-4 btn-danger button">Delete</button></a>
@@ -111,7 +111,7 @@
         const customeredit = document.querySelector('a.customerEdit');
 
         customeredit.addEventListener('click', (e) => {
-            const endpoint = `/customers/${customeredit.dataset.doc}`;
+            const endpoint = `/dashboard/customers/${customeredit.dataset.doc}`;
 
             fetch(endpoint, {
                     method: 'DELETE',
@@ -124,7 +124,7 @@
         const trash = document.querySelector('a.delete');
 
         trash.addEventListener('click', (e) => {
-            const endpoint = `/customers/${trash.dataset.doc}`;
+            const endpoint = `/dashboard/customers/${trash.dataset.doc}`;
 
             fetch(endpoint, {
                     method: 'DELETE',

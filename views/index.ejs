@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+<head>
+    <title>Admin Dashboard</title>
+</head>
+
 <body class="sidebar-is-reduced">
     <header class="l-header">
         <div class="l-header__inner clearfix">
@@ -20,7 +24,9 @@
             </div>
             <div class="header-icons-group">
                 <div class="c-header-icon basket"><span class="c-badge c-badge--blue c-badge--header-icon animated swing">4</span><i class="fa fa-shopping-basket"></i></div>
-                <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
+                <a href="/logout">
+                    <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
+                </a>
             </div>
         </div>
     </header>
@@ -31,21 +37,21 @@
         <div class="l-sidebar__content">
             <nav class="c-menu js-menu">
                 <ul class="u-list">
-                    <a href="/">
+                    <a href="/dashboard">
                         <li class="c-menu__item is-active" data-toggle="tooltip" title="Flights">
                             <div class="c-menu__item__inner" style="padding-left: 10px;"><i class="fas fa-home"></i>
                                 <div class="c-menu-item__title" style="padding-left: 10px;"><span>Overview</span></div>
                             </div>
                         </li>
                     </a>
-                    <a href="/transactions">
+                    <a href="/dashboard/transactions">
                         <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Statistics">
                             <div class="c-menu__item__inner" style="padding-left: 10px;"><i class="fas fa-file"></i>
                                 <div class="c-menu-item__title" style="padding-left: 10px;"><span>Transactions</span></div>
                             </div>
                         </li>
                     </a>
-                    <a href="/customers">
+                    <a href="/dashboard/customers">
                         <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
                             <div class="c-menu__item__inner" style="padding-left: 10px;"><i class="fas fa-users"></i>
                                 <div class="c-menu-item__title" style="padding-left: 10px;"><span>Customers</span></div>
@@ -77,10 +83,6 @@
             let hasSubmenu = ($(el).hasClass("has-submenu"));
             $(global.menuClass + " .is-active").removeClass("is-active");
             $(el).addClass("is-active");
-
-            // if (hasSubmenu) {
-            // 	$(el).find("ul").slideDown();
-            // }
         };
 
         let sidebarChangeWidth = () => {

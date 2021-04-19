@@ -4,7 +4,7 @@
     <%- include("./index.ejs") %>
         <main class="l-main">
             <div class="content-wrapper content-wrapper--with-bg">
-                <form action="/transactions" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px; ">
+                <form action="/dashboard/transactions" method="POST" class="col-12" style="margin-left: 20px;margin-right: 20px; ">
                     <h1>Transaction Form</h1>
                     <!-- 2 column grid layout with text inputs for the first and last names -->
                     <div class="row mb-4">
@@ -96,7 +96,7 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col">
-                            <a data-doc="<%= transaction._id %>" class="edit"><button type="submit" class="btn btn-primary btn-block mb-4">Add Transaction</button></a>
+                            <a data-doc="<%= transaction._id %>" class="edit"><button type="submit" class="btn btn-primary btn-block mb-4">Update Transaction</button></a>
                         </div>
                         <div class="col">
                             <a data-doc="<%= transaction._id %>" class="delete"><button type="button" class="btn btn-block mb-4 btn-danger button">Delete</button></a>
@@ -120,7 +120,7 @@
             const transactionedit = document.querySelector('a.edit');
 
             transactionedit.addEventListener('click', (e) => {
-                const endpoint = `/transactions/${transactionedit.dataset.doc}`;
+                const endpoint = `/dashboard/transactions/${transactionedit.dataset.doc}`;
 
                 fetch(endpoint, {
                         method: 'DELETE',
@@ -133,7 +133,7 @@
             const trashcan = document.querySelector('a.delete');
 
             trashcan.addEventListener('click', (e) => {
-                const endpoint = `/transactions/${trashcan.dataset.doc}`;
+                const endpoint = `/dashboard/transactions/${trashcan.dataset.doc}`;
 
                 fetch(endpoint, {
                         method: 'DELETE',

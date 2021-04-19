@@ -2,142 +2,143 @@ const express = require('express')
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const dashboardRoutes = require('./routes/dashboardRoutes')
+
+
 require('dotenv').config()
 
-const Transaction = require('./models/transaction');
-const Customer = require('./models/customer')
-    // connect to mongodb & listen for requests
+const User = require("./models/user");
+// connect to mongodb & listen for requests
 const dbURI = process.env.db;
-
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => app.listen(3000), console.log('connected'))
     .catch(err => console.log(err));
+
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 // register view engine
 app.set('view engine', 'ejs');
 
 // middleware & static files
 // app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('dev'));
+// initialize cookie-parser to allow us access the cookies stored in the browser.
+app.use(cookieParser());
+
+
+// initialize express-session to allow us track the logged-in user across sessions.
+app.use(
+    session({
+        key: "user_sid",
+        secret: "somerandonstuffs",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 300000,
+        },
+    })
+);
+
+// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
+// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
-    res.locals.path = req.path;
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie("user_sid");
+    }
     next();
 });
 
-// Dashboard total counts
-app.get('/', (req, res) => {
-    Transaction.estimatedDocumentCount()
-    Customer.estimatedDocumentCount()
-        .then(result => {
-            res.render('content', { transactioncount: result, customercount: result });
-        })
-        .catch(err => {
-            console.log(err);
+// middleware function to check for logged-in users
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect("/dashboard");
+    } else {
+        next();
+    }
+};
+
+// Login
+// route for user signup
+app
+    .route("/signup")
+    .get(sessionChecker, (req, res) => {
+        res.sendFile(__dirname + "/public/signup.html");
+    })
+    .post((req, res) => {
+
+        var user = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
         });
-})
-
-// customers
-app.get('/customers', (req, res) => {
-    Customer.find().sort({ createdAt: -1 })
-        .then(result => {
-            res.render('customers', { customers: result });
-        })
-        .catch(err => {
-            console.log(err);
+        user.save((err, docs) => {
+            if (err) {
+                res.redirect("/signup");
+                // save new user
+            } else {
+                console.log(docs)
+                req.session.user = docs;
+                res.redirect("/dashboard");
+            }
         });
-})
+    });
 
-app.get('/customerForm', (req, res) => {
-    // res.send('Hello World!')
-    res.render('customerForm');
-})
+// route for user Login
+app
+    .route("/login")
+    .get(sessionChecker, (req, res) => {
+        res.sendFile(__dirname + "/public/login.html");
+    })
+    .post(async(req, res) => {
+        var username = req.body.username,
+            password = req.body.password;
 
-// customer
-app.post('/customers', (req, res) => {
-    // console.log(req.body);
-    const customer = new Customer(req.body);
-
-    customer.save()
-        .then(result => {
-            res.redirect('/customers');
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        try {
+            var user = await User.findOne({ username: username }).exec();
+            if (!user) {
+                res.redirect("/login");
+            }
+            user.comparePassword(password, (error, match) => {
+                if (!match) {
+                    res.redirect("/login");
+                }
+            });
+            req.session.user = user;
+            res.redirect("/dashboard");
+        } catch (error) {
+            console.log(error)
+        }
+    });
+// route for user's dashboard
+app.get("/", (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.sendFile(__dirname + "/public/home.html");
+    } else {
+        res.redirect("/login");
+    }
 });
 
-app.get('/customers/:id', (req, res) => {
-    const id = req.params.id;
-    Customer.findById(id)
-        .then(result => {
-            res.render('updateCustomers', { customer: result });
-        })
-        .catch(err => {
-            console.log(err);
-        });
+// route for user logout
+app.get("/logout", (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.clearCookie("user_sid");
+        res.redirect("/");
+    } else {
+        res.redirect("/login");
+    }
 });
 
-app.delete('/customers/:id', (req, res) => {
-    const id = req.params.id;
+// dashboard routes controller
+// use the routes after /dashboard
+app.use('/dashboard', dashboardRoutes);
 
-    Customer.findByIdAndDelete(id)
-        .then(result => {
-            res.json({ redirect: '/customers' });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-});
-
-// transactions
-app.get('/transactionForm', (req, res) => {
-    res.render('transactionForm');
-
-})
-
-app.get('/transactions', (req, res) => {
-    Transaction.find().sort({ createdAt: -1 })
-        .then(result => {
-            res.render('transactions', { transactions: result });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-})
-
-// post
-app.post('/transactions', (req, res) => {
-    // console.log(req.body);
-    const transaction = new Transaction(req.body);
-
-    transaction.save()
-        .then(result => {
-            res.redirect('/transactions');
-        })
-        .catch(err => {
-            console.log(err);
-        });
-});
-
-app.get('/transactions/:id', (req, res) => {
-    const id = req.params.id;
-    Transaction.findById(id)
-        .then(result => {
-            res.render('updateTransactions', { transaction: result });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-});
-
-app.delete('/transactions/:id', (req, res) => {
-    const id = req.params.id;
-
-    Transaction.findByIdAndDelete(id)
-        .then(result => {
-            res.json({ redirect: '/transactions' });
-        })
-        .catch(err => {
-            console.log(err);
-        });
+// route for handling 404 requests(unavailable routes)
+app.use(function(req, res, next) {
+    res.status(404).send("Sorry can't find that!");
 });

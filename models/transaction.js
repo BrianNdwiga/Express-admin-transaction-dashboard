@@ -15,15 +15,12 @@ const transactionSchema = new Schema({
     },
     transactiontype: {
         type: String,
-        required: true
     },
     paymentmethods: {
         type: String,
-        required: true
     },
     currency: {
         type: String,
-        required: true
     },
     amount: {
         type: Number,

@@ -4,7 +4,7 @@
         <div class="content-wrapper content-wrapper--with-bg">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">Overview</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
                         Transactions
                     </li>
@@ -17,7 +17,7 @@
                 <div style="display: flex; padding: 10px">
                     <%- include("./tablebuttons.ejs") %>
                         <button type="button" class="btn btn-primary" id="print">Print</button>
-                        <a href="/transactionForm" style="margin-left: auto"><button type="button" class="btn btn-primary">
+                        <a href="/dashboard/transactionForm" style="margin-left: auto"><button type="button" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Add Transaction
                       </button></a>
                 </div>
@@ -64,7 +64,7 @@
                                         <%= transaction.referencenumber %>
                                     </td>
                                     <td style="display: flex;">
-                                        <a href="/transactions/<%= transaction._id %>"><button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button></a>
+                                        <a href="/dashboard/transactions/<%= transaction._id %>"><button type="button" class="btn btn-warning button"><i class="fas fa-edit"></i></button></a>
                                     </td>
                                 </tr>
                                 <% }) %>

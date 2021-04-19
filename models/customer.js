@@ -12,7 +12,6 @@ const customerSchema = new Schema({
     },
     date: {
         type: Date,
-        required: true
     },
     currency: {
         type: String,
@@ -24,11 +23,9 @@ const customerSchema = new Schema({
     },
     group: {
         type: String,
-        required: true
     },
     status: {
         type: String,
-        required: true
     }
 }, { timestamps: true });
 
