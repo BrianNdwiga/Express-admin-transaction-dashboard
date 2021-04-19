@@ -6,16 +6,13 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const dashboardRoutes = require('./routes/dashboardRoutes')
-
-
 const dotenv = require("dotenv");
 dotenv.config();
 
 const User = require("./models/user");
 // connect to mongodb & listen for requests
-const db = process.env.db;
 const port = process.env.PORT;
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://brian:test123@node-tuts.ggxki.mongodb.net/node-tuts??authSource=node-tuts&w=1", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => app.listen(port), console.log('connected'))
     .catch(err => console.log(err));
 
@@ -46,7 +43,6 @@ app.use(
         },
     })
 );
-
 // This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
 // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
