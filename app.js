@@ -66,7 +66,8 @@ var sessionChecker = (req, res, next) => {
 app
     .route("/signup")
     .get(sessionChecker, (req, res) => {
-        res.sendFile(__dirname + "/public/signup.html");
+        // res.sendFile(__dirname + "/public/signup.html");
+        res.render('signup')
     })
     .post((req, res) => {
 
@@ -91,7 +92,7 @@ app
 app
     .route("/login")
     .get(sessionChecker, (req, res) => {
-        res.sendFile(__dirname + "/public/login.html");
+        res.render('login')
     })
     .post(async(req, res) => {
         var username = req.body.username,
@@ -116,7 +117,8 @@ app
 // route for user's dashboard
 app.get("/", (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
-        res.sendFile(__dirname + "/public/home.html");
+        res.render('home');
+        // res.sendFile(__dirname + "/public/home.html");
     } else {
         res.redirect("/login");
     }

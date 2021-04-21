@@ -65,7 +65,13 @@ const dashboard_customers_delete = (req, res) => {
 
 // transaction controllers
 const dashboard_transactionform = (req, res) => {
-    res.render('transactionForm');
+    Customer.find().sort({ createdAt: -1 })
+        .then(result => {
+            res.render('transactionForm', { customers: result });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 const dashboard_transactions = (req, res) => {

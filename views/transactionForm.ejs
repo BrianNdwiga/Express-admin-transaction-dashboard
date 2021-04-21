@@ -14,8 +14,12 @@
                     </div>
                     <div class="col">
                         <div class="form-outline">
-                            <input type="text" id="sendername" name="sendername" class="form-control" required />
                             <label class="form-label" for="sendername">Sender Name</label>
+                            <select class="form-select" id="sendername" name="sendername" aria-label="Default select example" required style="width: 70%;">
+                                <% customers.forEach(customer => { %>
+                                    <option value="<%= customer.name %>"><%= customer.name %></option>
+                                        <% }) %>
+                              </select>
                         </div>
                     </div>
                 </div>
@@ -87,7 +91,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4">Add Transaction</button>
             </form>
         </div>
