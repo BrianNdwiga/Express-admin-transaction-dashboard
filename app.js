@@ -12,7 +12,7 @@ dotenv.config();
 const User = require("./models/user");
 // connect to mongodb & listen for requests
 const port = process.env.PORT;
-mongoose.connect("mongodb+srv://brian:test123@node-tuts.ggxki.mongodb.net/node-tuts??authSource=node-tuts&w=1", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => app.listen(port), console.log('connected'))
     .catch(err => console.log(err));
 
